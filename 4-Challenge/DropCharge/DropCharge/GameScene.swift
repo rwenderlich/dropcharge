@@ -47,18 +47,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   var player = SKSpriteNode(imageNamed: "player01_fall_1.png")
   var gameState = GameState.WaitingForTap
   var levelMaxY: CGFloat = 0
-  let soundBoost = SKAction.playSoundFileNamed("boost.wav", waitForCompletion: false)
-  let soundSuperBoost = SKAction.playSoundFileNamed("nitro.wav", waitForCompletion: false)
-  let soundJump = SKAction.playSoundFileNamed("jump.wav", waitForCompletion: false)
-  let soundCoin = SKAction.playSoundFileNamed("coin1.wav", waitForCompletion: false)
-  let soundBrick = SKAction.playSoundFileNamed("brick.caf", waitForCompletion: false)
-  let soundHitLava = SKAction.playSoundFileNamed("DrownFireBug.mp3", waitForCompletion: false)
-  let soundTickTock = SKAction.playSoundFileNamed("tickTock.wav", waitForCompletion: false)
-  let soundBombDrop = SKAction.playSoundFileNamed("bombDrop.wav", waitForCompletion: false)
-  let explosion1 = SKAction.playSoundFileNamed("explosion1.wav", waitForCompletion: false)
-  let explosion2 = SKAction.playSoundFileNamed("explosion2.wav", waitForCompletion: false)
-  let explosion3 = SKAction.playSoundFileNamed("explosion3.wav", waitForCompletion: false)
-  let explosion4 = SKAction.playSoundFileNamed("explosion4.wav", waitForCompletion: false)
   let shapeNode = SKShapeNode()
   var lava: SKNode = SKNode()
   var visibleMinYFg = CGFloat(0)
@@ -69,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   let title = SKSpriteNode(imageNamed: "DropCharge_title")
   let bomb = SKSpriteNode(imageNamed: "bomb_1")
   var playerTrail: SKEmitterNode! = nil
-  let bgMusicAlarm = AVAudioPlayer(contentsOfURL: NSBundle.mainBundle().URLForResource("alarm", withExtension: "wav"), error: nil)
+  
   var animJump: SKAction! = nil
   var animFall: SKAction! = nil
   var animSteerLeft: SKAction! = nil
@@ -77,9 +65,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   var curAnim: SKAction? = nil
   var timeSinceLastExplosion: CGFloat = 0
   var timeForNextExplosion: CGFloat = 0
+  var soundManager: SoundManager!
   
   // MARK: Init
-  
   override func didMoveToView(view: SKView) {
     setupMusic()
     setupPhysics()
@@ -93,7 +81,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
   
   func setupMusic() {
-    SKTAudio.sharedInstance().playBackgroundMusic("SpaceGame.caf")
+    soundManager = SoundManager(node: self)
+    soundManager.playMusicBackground()
   }
   
   func setupPhysics() {
@@ -181,9 +170,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     title.runAction(SKAction.scaleTo(0, duration: 0.5))
     
-    runAction(soundBombDrop)
-    let repeatTickTock = SKAction.repeatAction(soundTickTock, count: 2)
-    runAction(repeatTickTock)
+    soundManager.playSoundBombDrop()
+    soundManager.playSoundTickTock()
     
     bomb.position = CGPoint(x: player.position.x, y: player.position.y)
     bomb.zPosition = ForegroundZ.Bomb.rawValue
@@ -208,9 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
     gameState = .Playing
   
-    SKTAudio.sharedInstance().playBackgroundMusic("bgMusic.mp3")
-    bgMusicAlarm.numberOfLoops = -1
-    bgMusicAlarm.play()
+    soundManager.playMusicAction()    
     
     let emitter = SKEmitterNode(fileNamed: "BigExplosion")
     emitter.position = bomb.position
@@ -218,7 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     emitter.runAction(SKAction.removeFromParentAfterDelay(2.0))
     
     player.physicsBody!.dynamic = true
-    runAction(soundSuperBoost)
+    soundManager.playSoundSuperBoost()
     superBoostPlayer()
   
   }
@@ -235,8 +221,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     removeTrail(playerTrail)
     
     // Sound effects
-    SKTAudio.sharedInstance().playBackgroundMusic("SpaceGame.caf")
-    bgMusicAlarm.stop()
+    soundManager.playMusicBackground()
     
     // Bounce player
     let moveUpAction = SKAction.moveByX(0, y: size.height/2, duration: 0.5)
@@ -637,7 +622,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
   func hitLava() {
   
-    runAction(soundHitLava)
+    soundManager.playSoundHitLava()
     boostPlayer()
     screenShakeByAmt(50)
     
@@ -671,9 +656,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
   func createRandomExplosionAtPos(pos: CGPoint, scaleFactor: CGFloat) {
     
-    let explosions = [explosion1, explosion2, explosion3, explosion4]
-    let randomNum = Int.random(explosions.count)
-    runAction(explosions[randomNum])
+    let randomNum = Int.random(soundManager.soundExplosions.count)
+    soundManager.playSoundExplosion(randomNum)
     
     let explosion = SKEmitterNode(fileNamed: "ColoredExplosion")
     explosion.position = convertPoint(pos, toNode:self.mgNode)
@@ -682,7 +666,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     explosion.runAction(SKAction.removeFromParentAfterDelay(1.0))
     
-    if (Int.random(explosions.count) == 0) {
+    if (Int.random(soundManager.soundExplosions.count) == 0) {
       screenShakeByAmt(4.0 * CGFloat(randomNum) * scaleFactor)
     }
     
@@ -708,19 +692,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let coin = other.node as? SKSpriteNode {
           coin.removeFromParent()
           jumpPlayer()
-          runAction(soundCoin)
+          soundManager.playSoundCoin()
         }
       case PhysicsCategory.CoinSpecial:
         if let coin = other.node as? SKSpriteNode {
           coin.removeFromParent()
           boostPlayer()
-          runAction(soundBoost)
+          soundManager.playSoundBoost()
         }
       case PhysicsCategory.PlatformNormal:
         if let platform = other.node as? SKSpriteNode {
           if (player.physicsBody?.velocity.dy < 0) {
             jumpPlayer()
-            runAction(soundJump)
+            soundManager.playSoundJump()
           }
         }
       case PhysicsCategory.PlatformBreakable:
@@ -728,7 +712,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
           if (player.physicsBody?.velocity.dy < 0) {
             platform.removeFromParent()
             jumpPlayer()
-            runAction(soundBrick)
+            soundManager.playSoundBrick()
           }
         }
       default:
