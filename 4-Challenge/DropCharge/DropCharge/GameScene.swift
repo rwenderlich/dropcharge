@@ -46,7 +46,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   var dt: NSTimeInterval = 0
   var player = SKSpriteNode(imageNamed: "player01_fall_1.png")
   var gameState = GameState.WaitingForTap
-  var helper = DropChargeHelper()
   var levelMaxY: CGFloat = 0
   let soundBoost = SKAction.playSoundFileNamed("boost.wav", waitForCompletion: false)
   let soundSuperBoost = SKAction.playSoundFileNamed("nitro.wav", waitForCompletion: false)
@@ -110,19 +109,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
   
   func setupBgNode() {
-//    let sprite = SKSpriteNode(imageNamed: "bg_1")
-//    sprite.position = CGPoint(x: size.width/2, y: size.height/2)
-//    bgNode.addChild(sprite)
-
-    helper.setupBgNode(self, bgNode: bgNode)
+    setupRepeatable(bgNode, prefix: "bg_", number: 3, containerSize: CGSize(width: size.width, height: size.height))
   }
   
   func setupMgNode() {
-//    let sprite = SKSpriteNode(imageNamed: "midground_1")
-//    sprite.position = CGPoint(x: size.width/2, y: size.height/2)
-//    bgNode.addChild(sprite)
-    
-    helper.setupMgNode(self, mgNode: mgNode)
+    setupRepeatable(mgNode, prefix: "midground_", number: 4, containerSize: CGSize(width: size.width, height: size.height))
   }
     
   func setupPlayer() {
@@ -470,8 +461,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
       updateCamera()
       updateVisible()
-      helper.updateBgNode(self, bgNode: bgNode)
-      helper.updateMgNode(self, mgNode: mgNode)
+      updateRepeatable(bgNode)
+      updateRepeatable(mgNode)
       updateLevel()
 
       updatePlayer()
@@ -770,6 +761,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   func superBoostPlayer() {
     setPlayerVelocity(1500)
     screenShakeByAmt(100)
+  }
+  
+  private func setupRepeatable(parentNode: SKNode, prefix:String, number:Int, containerSize:CGSize) {
+    var yOffset = containerSize.height/2
+    for i in 1...number {
+      
+      // Create sprite
+      let sprite = SKSpriteNode(imageNamed: "\(prefix)\(i)")
+      sprite.position = CGPointZero
+      
+      // Create container
+      let container = SKSpriteNode()
+      container.size = containerSize
+      container.position = CGPoint(x: containerSize.width/2, y: yOffset)
+      container.addChild(sprite)
+      parentNode.addChild(container)
+      
+      // Increment y offset
+      yOffset += containerSize.height
+    }
+  }
+
+  private func updateRepeatable(parentNode: SKNode) {
+  
+    let bottomLeft = CGPoint(x: 0, y: 0)
+    let visibleMinY = convertPoint(bottomLeft, toNode: parentNode).y
+    
+    for node in parentNode.children {
+      if let container = node as? SKSpriteNode {
+        if container.position.y + container.size.height/2 < visibleMinY {
+          let newPosition = CGPoint(x: container.position.x, y: container.position.y + (container.size.height * CGFloat(parentNode.children.count)))
+          container.position = newPosition
+        }
+      }
+    }
   }
  
 }
