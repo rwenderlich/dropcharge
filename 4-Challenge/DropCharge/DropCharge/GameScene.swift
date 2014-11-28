@@ -57,11 +57,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   var animSteerLeft: SKAction! = nil
   var animSteerRight: SKAction! = nil
   var curAnim: SKAction? = nil
-  var timeSinceLastExplosion: CGFloat = 0
-  var timeForNextExplosion: CGFloat = 0
   var soundManager: SoundManager!
   var level: LevelNode!
   var lava: LavaNode!
+  var explosionManager: ExplosionManager!
   
   // MARK: Init
   override func didMoveToView(view: SKView) {
@@ -123,6 +122,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
     title.position = CGPoint(x: size.width/2, y: size.height * 0.7)
     worldNode.addChild(title)
+    
+    explosionManager = ExplosionManager(soundManager: soundManager, screenShakeByAmt: screenShakeByAmt, parentNode: mgNode)
     
   }
   
@@ -279,7 +280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       lava.update(dt)
       updateCollisionLava()
       
-      updateExplosionsWithLowRange(0.1, highRange:0.5, scaleFactor: 1.0)
+      explosionManager.update(dt)
     }
   }
   
@@ -346,20 +347,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
   }
   
-  func updateExplosionsWithLowRange(lowRange: CGFloat, highRange: CGFloat, scaleFactor: CGFloat) {
   
-    timeSinceLastExplosion += CGFloat(dt)
-    if timeSinceLastExplosion > timeForNextExplosion {
-    
-      timeForNextExplosion = CGFloat.random(min: lowRange, max: highRange)
-      timeSinceLastExplosion = 0
-      
-      let screenPos = CGPoint(x: CGFloat.random(min: 0, max: size.width), y: CGFloat.random(min: size.height * -0.1, max: size.height * 1.1))
-      createRandomExplosionAtPos(screenPos, scaleFactor: scaleFactor)
-    
-    }
-  
-  }
   
   // MARK: Special effects
   
@@ -409,23 +397,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
   }
   
-  func createRandomExplosionAtPos(pos: CGPoint, scaleFactor: CGFloat) {
-    
-    let randomNum = Int.random(soundManager.soundExplosions.count)
-    soundManager.playSoundExplosion(randomNum)
-    
-    let explosion = SKEmitterNode(fileNamed: "ColoredExplosion")
-    explosion.position = convertPoint(pos, toNode:self.mgNode)
-    explosion.particleScale = ((CGFloat(randomNum) + 1) / 2) * scaleFactor
-    mgNode.addChild(explosion)
-    
-    explosion.runAction(SKAction.removeFromParentAfterDelay(1.0))
-    
-    if (Int.random(soundManager.soundExplosions.count) == 0) {
-      screenShakeByAmt(4.0 * CGFloat(randomNum) * scaleFactor)
-    }
-    
-  }
+  
   
   func screenShakeByAmt(amt: CGFloat) {
     worldNode.position = CGPointZero
