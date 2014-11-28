@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3544F9B41A28DA56008A3480 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544F9B31A28DA56008A3480 /* SoundManager.swift */; };
 		3544F9B61A28E0B6008A3480 /* RepeatableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544F9B51A28E0B6008A3480 /* RepeatableNode.swift */; };
+		3544F9B81A28E4FD008A3480 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544F9B71A28E4FD008A3480 /* LevelNode.swift */; };
 		3562CD371A224D4F007E5E43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562CD361A224D4F007E5E43 /* AppDelegate.swift */; };
 		3562CD3B1A224D4F007E5E43 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562CD3A1A224D4F007E5E43 /* GameScene.swift */; };
 		3562CD3D1A224D4F007E5E43 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562CD3C1A224D4F007E5E43 /* GameViewController.swift */; };
@@ -94,6 +95,7 @@
 /* Begin PBXFileReference section */
 		3544F9B31A28DA56008A3480 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		3544F9B51A28E0B6008A3480 /* RepeatableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatableNode.swift; sourceTree = "<group>"; };
+		3544F9B71A28E4FD008A3480 /* LevelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
 		3562CD311A224D4F007E5E43 /* DropCharge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropCharge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3562CD351A224D4F007E5E43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3562CD361A224D4F007E5E43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			children = (
 				3544F9B31A28DA56008A3480 /* SoundManager.swift */,
 				3544F9B51A28E0B6008A3480 /* RepeatableNode.swift */,
+				3544F9B71A28E4FD008A3480 /* LevelNode.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				3544F9B41A28DA56008A3480 /* SoundManager.swift in Sources */,
 				3562CDD21A224D64007E5E43 /* CGPoint+Extensions.swift in Sources */,
 				3562CDDB1A224D64007E5E43 /* SKTTimingFunctions.swift in Sources */,
+				3544F9B81A28E4FD008A3480 /* LevelNode.swift in Sources */,
 				3562CDDA1A224D64007E5E43 /* SKTEffects.swift in Sources */,
 				3562CDD61A224D64007E5E43 /* SKAction+SpecialEffects.swift in Sources */,
 				3562CDD31A224D64007E5E43 /* CGVector+Extensions.swift in Sources */,
