@@ -10,31 +10,6 @@ import SpriteKit
 import CoreMotion
 import AVFoundation
 
-enum GameState {
-case WaitingForTap
-case WaitingForBomb
-case Playing
-case GameOver
-}
-
-struct PhysicsCategory {
-static let None: UInt32              = 0
-static let Player: UInt32            = 0b1      // 1
-static let PlatformNormal: UInt32    = 0b10     // 2
-static let PlatformBreakable: UInt32 = 0b100    // 4
-static let CoinNormal: UInt32        = 0b1000   // 8
-static let CoinSpecial: UInt32       = 0b10000  // 16
-static let Edges: UInt32             = 0b100000 // 32
-}
-
-enum ForegroundZ: CGFloat {
-case Platforms
-case Bomb
-case Coins
-case Lava
-case Player
-}
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
   // MARK: Properties
@@ -220,12 +195,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
   }
   
-  // MARK: Game Objects
-  
-  
-  // MARK: Level Spawning
-  
-    
   // MARK: Touch Handling
   
   func handlePlayingTouches(touches: NSSet) {
@@ -347,8 +316,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
   }
   
-  
-  
   // MARK: Special effects
   
   func removeTrail(trail: SKEmitterNode) {
@@ -396,8 +363,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       curAnim = anim
     }
   }
-  
-  
   
   func screenShakeByAmt(amt: CGFloat) {
     worldNode.position = CGPointZero

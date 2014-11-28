@@ -12,6 +12,7 @@
 		3544F9B81A28E4FD008A3480 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544F9B71A28E4FD008A3480 /* LevelNode.swift */; };
 		3544F9BA1A28E99B008A3480 /* LavaNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544F9B91A28E99B008A3480 /* LavaNode.swift */; };
 		3544F9BC1A28EFC8008A3480 /* ExplosionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544F9BB1A28EFC8008A3480 /* ExplosionManager.swift */; };
+		3544F9BE1A28F273008A3480 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3544F9BD1A28F273008A3480 /* Constants.swift */; };
 		3562CD371A224D4F007E5E43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562CD361A224D4F007E5E43 /* AppDelegate.swift */; };
 		3562CD3B1A224D4F007E5E43 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562CD3A1A224D4F007E5E43 /* GameScene.swift */; };
 		3562CD3D1A224D4F007E5E43 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3562CD3C1A224D4F007E5E43 /* GameViewController.swift */; };
@@ -100,6 +101,7 @@
 		3544F9B71A28E4FD008A3480 /* LevelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
 		3544F9B91A28E99B008A3480 /* LavaNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LavaNode.swift; sourceTree = "<group>"; };
 		3544F9BB1A28EFC8008A3480 /* ExplosionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplosionManager.swift; sourceTree = "<group>"; };
+		3544F9BD1A28F273008A3480 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3562CD311A224D4F007E5E43 /* DropCharge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropCharge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3562CD351A224D4F007E5E43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3562CD361A224D4F007E5E43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				3544F9B71A28E4FD008A3480 /* LevelNode.swift */,
 				3544F9B91A28E99B008A3480 /* LavaNode.swift */,
 				3544F9BB1A28EFC8008A3480 /* ExplosionManager.swift */,
+				3544F9BD1A28F273008A3480 /* Constants.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				3562CDD61A224D64007E5E43 /* SKAction+SpecialEffects.swift in Sources */,
 				3562CDD31A224D64007E5E43 /* CGVector+Extensions.swift in Sources */,
 				3562CDD51A224D64007E5E43 /* SKAction+Extensions.swift in Sources */,
+				3544F9BE1A28F273008A3480 /* Constants.swift in Sources */,
 				3562CDD71A224D64007E5E43 /* SKColor+Extensions.swift in Sources */,
 				3562CD3D1A224D4F007E5E43 /* GameViewController.swift in Sources */,
 				3562CDD41A224D64007E5E43 /* Int+Extensions.swift in Sources */,
