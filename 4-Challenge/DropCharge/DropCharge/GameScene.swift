@@ -46,9 +46,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   var dt: NSTimeInterval = 0
   var player = SKSpriteNode(imageNamed: "player01_fall_1.png")
   var gameState = GameState.WaitingForTap
-  var lava: SKNode = SKNode()
-  var visibleMinYFg = CGFloat(0)
-  var visibleMaxYFg = CGFloat(0)
   let motionManager = CMMotionManager()
   var xAcceleration = CGFloat(0)
   var lives = 3
@@ -64,6 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   var timeForNextExplosion: CGFloat = 0
   var soundManager: SoundManager!
   var level: LevelNode!
+  var lava: LavaNode!
   
   // MARK: Init
   override func didMoveToView(view: SKView) {
@@ -129,13 +127,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
   
   func setupLava() {
-    if true {
-      lava = SKEmitterNode(fileNamed: "Lava")
-    } else {
-      lava = SKSpriteNode(color: SKColorWithRGB(255, 134, 16), size:CGSize(width: 320, height: 150))
-    }
-    lava.zPosition = ForegroundZ.Lava.rawValue
-    lava.position = CGPoint(x:size.width/2, y:-300)
+    lava = LavaNode(useEmitter: true)
+    lava.position = CGPoint(x: size.width/2, y: -300)
     fgNode.addChild(lava)
   }
   
@@ -278,15 +271,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     if gameState == .Playing {
     
       updateCamera()
-      updateVisible()
-      bgNode.update()
-      mgNode.update()
+      bgNode.update(lastUpdateTime)
+      mgNode.update(lastUpdateTime)
       level.update()
 
       updatePlayer()
-      updateLava()
+      lava.update(dt)
       updateCollisionLava()
-      updateRedAlert()
       
       updateExplosionsWithLowRange(0.1, highRange:0.5, scaleFactor: 1.0)
     }
@@ -311,16 +302,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
   }
   
-  func updateVisible() {
-
-    let lowerLeft = CGPoint(x: 0, y: 0)
-    let upperLeft = CGPoint(x: 0, y: size.height)
-
-    visibleMinYFg = convertPoint(lowerLeft, toNode: fgNode).y
-    visibleMaxYFg = convertPoint(upperLeft, toNode: fgNode).y
-
-  }
-    
   func updatePlayer() {
   
     // Set velocity based on core motion
@@ -351,17 +332,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
   }
   
-  func updateLava() {
-    
-    let lavaVelocity = CGPoint(x: 0, y: 120)
-    let lavaStep = lavaVelocity * CGFloat(dt)
-    var newPosition = lava.position + lavaStep
-    
-    newPosition.y = max(newPosition.y, visibleMinYFg - 25.0)
-    lava.position = newPosition
-    
-  }
-  
   func updateCollisionLava() {
     
     if player.position.y < lava.position.y + 90 {
@@ -374,31 +344,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       }
       
     }
-  }
-  
-  func updateRedAlert() {
-  
-    let amt: CGFloat = CGFloat(lastUpdateTime) * π * 2.0 / 1.93725
-    let colorBlendFactor = (sin(amt) + 1.0) / 2.0
-    
-    for container in bgNode.children {
-      for node in container.children {
-        if let sprite = node as? SKSpriteNode {
-          sprite.color = SKColorWithRGB(255, 0, 0)
-          sprite.colorBlendFactor = colorBlendFactor
-        }
-      }
-    }
-    
-    for container in mgNode.children {
-      for node in container.children {
-        if let sprite = node as? SKSpriteNode {
-          sprite.color = SKColorWithRGB(255, 0, 0)
-          sprite.colorBlendFactor = colorBlendFactor
-        }
-      }
-    }
-  
   }
   
   func updateExplosionsWithLowRange(lowRange: CGFloat, highRange: CGFloat, scaleFactor: CGFloat) {
