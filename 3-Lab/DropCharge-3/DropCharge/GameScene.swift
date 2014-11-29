@@ -18,13 +18,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   let motionManager = CMMotionManager()
   var xAcceleration = CGFloat(0)
   var gameState = GameState.WaitingForTap
-  var title: SKSpriteNode!
   let worldNode = SKNode()
   var bgNode = BackgroundNode()
   var mgNode = MidgroundNode()
   var fgNode = SKNode()
   var level = LevelNode()
-  var player = SKSpriteNode(imageNamed: "player01_fall_1.png")
+  var title: SKSpriteNode!
+  let player = SKSpriteNode(imageNamed: "player01_fall_1.png")
   let bomb = SKSpriteNode(imageNamed: "bomb_1")
   var lava: LavaNode!
   var lives = 3
@@ -41,12 +41,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   func setupLevel() {
-  
     title = SKSpriteNode(imageNamed: "DropCharge_title")
     title.position = CGPoint(x: size.width/2, y: size.height * 0.7)
-    title.zPosition = 100
-    addChild(title)
-  
+    fgNode.addChild(title)
   }
 
   func setupNodes() {
@@ -62,17 +59,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   func setupPlayer() {
-  
+
     player.position = CGPoint(x: size.width / 2, y: 80)
-    player.zPosition = ForegroundZ.Player.rawValue
     fgNode.addChild(player)
+    player.zPosition = ForegroundZ.Player.rawValue
     
     player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
     player.physicsBody!.dynamic = false
     player.physicsBody!.allowsRotation = false
     player.physicsBody!.categoryBitMask = PhysicsCategory.Player
     player.physicsBody!.collisionBitMask = 0
-  
+    
   }
 
   func setupPhysics() {
@@ -107,12 +104,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Scale out title
     let scale = SKAction.scaleTo(0, duration: 0.5)
     title.runAction(scale)
-    
+
     // Add bomb
     bomb.position = player.position
-    bomb.zPosition = ForegroundZ.Bomb.rawValue
     fgNode.addChild(bomb)
-    
+    bomb.zPosition = ForegroundZ.Bomb.rawValue
+
     // Bounce bomb
     let scaleUp = SKAction.scaleTo(1.25, duration: 0.25)
     let scaleDown = SKAction.scaleTo(1.0, duration: 0.25)
@@ -139,19 +136,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Start player movement
     player.physicsBody!.dynamic = true
     superBoostPlayer()
-  
+    
   }
   
   func switchToGameOver() {
-  
-    // Switch game state
+
+    // 1 - Switch game state
     gameState = .GameOver
     
-    // Turn off physics
+    // 2 - Turn off physics
     physicsWorld.contactDelegate = nil
     player.physicsBody?.dynamic = false
     
-    // Bounce player
+    // 3 - Bounce player
     let moveUpAction = SKAction.moveByX(0, y: size.height/2, duration: 0.5)
     moveUpAction.timingMode = .EaseOut
     let moveDownAction = SKAction.moveByX(0, y: -size.height, duration: 1.0)
@@ -159,11 +156,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let sequence = SKAction.sequence([moveUpAction, moveDownAction])
     player.runAction(sequence)
     
-    // Game Over
+    // 4 - Game Over
     let gameOver = SKSpriteNode(imageNamed: "GameOver")
     gameOver.position = CGPoint(x: size.width/2, y: size.height/2)
     addChild(gameOver)
-  
+
   }
   
   // MARK: Touch Handling
@@ -182,8 +179,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       case .Playing:
         handlePlayingTouches(touches)
       case .GameOver:
+        // 1
         let newScene = GameScene(size: size)
+        // 2
         let reveal = SKTransition.flipHorizontalWithDuration(0.5)
+        // 3
         self.view?.presentScene(newScene, transition: reveal)
       default:
         break;
@@ -226,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var targetPosition = CGPoint(x: worldNode.position.x, y: -(target.y - size.height * 0.4))
     targetPosition.y = min(targetPosition.y, -(lava.position.y))
     var newPosition = targetPosition
-    
+
     self.fgNode.position = newPosition
     self.mgNode.position = CGPoint(x: newPosition.x/5.0, y: newPosition.y/5.0)
     self.bgNode.position = CGPoint(x: newPosition.x/10.0, y: newPosition.y/10.0)
@@ -234,16 +234,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
   
   func updatePlayer() {
-  
+    
     // Set velocity based on core motion
     player.physicsBody?.velocity = CGVector(dx: xAcceleration * 400.0, dy: player.physicsBody!.velocity.dy)
   
     // Wrap player around edges of screen
-    if player.position.x < player.size.width/2 {
-      player.position.x += size.width
+    if player.position.x < -player.size.width/2 {
+      player.position.x = size.width + player.size.width/2
     }
     else if player.position.x > size.width + player.size.width/2 {
-      player.position.x -= size.width
+      player.position.x = -player.size.width/2
     }
   
   }
@@ -258,7 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       }
     }
   }
-    
+  
   // MARK: Contacts
   
   func didBeginContact(contact: SKPhysicsContact) {

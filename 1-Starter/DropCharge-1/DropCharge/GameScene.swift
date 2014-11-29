@@ -10,7 +10,7 @@ import SpriteKit
 import CoreMotion
 import AVFoundation
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
 
   // MARK: Properties
   var lastUpdateTime: NSTimeInterval = 0
@@ -35,10 +35,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   func setupLevel() {
-  
   }
 
   func setupNodes() {
+  
     addChild(worldNode)
     worldNode.addChild(bgNode)
     worldNode.addChild(mgNode)
@@ -46,6 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     level.zPosition = ForegroundZ.Level.rawValue
     fgNode.addChild(level)
+  
   }
 
   func setupPlayer() {
@@ -86,6 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   func switchToPlaying() {
   
     // Switch game state
+    gameState = .Playing
     
     // Stop bomb
     
@@ -140,9 +142,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
   
   func updateCamera() {
+  
+    /*
+    let target = player.position
+    var targetPosition = CGPoint(x: worldNode.position.x, y: -(target.y - size.height * 0.4))
+    var newPosition = targetPosition
+    
+    self.fgNode.position = newPosition
+    self.mgNode.position = newPosition
+    self.bgNode.position = newPosition
+    */
+  
   }
   
   func updatePlayer() {
+    
+    // Set velocity based on core motion
+    // player.physicsBody?.velocity = CGVector(dx: xAcceleration * 400.0, dy: player.physicsBody!.velocity.dy)
+  
+    // Wrap player around edges of screen
+    /*
+    if player.position.x < -player.size.width/2 {
+      player.position.x = size.width + player.size.width/2
+    }
+    else if player.position.x > size.width + player.size.width/2 {
+      player.position.x = -player.size.width/2
+    }
+    */
+  
   }
     
   // MARK: Contacts

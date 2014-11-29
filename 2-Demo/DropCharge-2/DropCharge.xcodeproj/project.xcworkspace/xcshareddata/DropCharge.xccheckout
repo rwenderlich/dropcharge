@@ -14,7 +14,7 @@
 		<string>github.com:rwenderlich/dropcharge.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>1-Starter/DropCharge/DropCharge.xcodeproj</string>
+	<string>2-Demo/DropCharge-2/DropCharge.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F71A2667ED7A6E8102A95A0C14CA67E196B4F7BE</key>
