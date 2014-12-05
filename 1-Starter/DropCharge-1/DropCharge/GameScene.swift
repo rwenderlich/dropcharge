@@ -158,7 +158,7 @@ class GameScene: SKScene {
   func updatePlayer() {
     
     // Set velocity based on core motion
-    // player.physicsBody?.velocity = CGVector(dx: xAcceleration * 400.0, dy: player.physicsBody!.velocity.dy)
+    // player.physicsBody?.velocity.dx = xAcceleration * 400.0
   
     // Wrap player around edges of screen
     /*

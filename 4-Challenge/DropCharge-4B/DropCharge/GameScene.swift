@@ -185,7 +185,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     if let touch = touches.anyObject() as? UITouch {
       let touchTarget = touch.locationInNode(self)
       let xVelocity = touchTarget.x < player.position.x ? CGFloat(-150.0) : CGFloat(150.0)
-      player.physicsBody!.velocity = CGVector(dx: xVelocity, dy: player.physicsBody!.velocity.dy)
+      player.physicsBody!.velocity.dx = xVelocity
     }
   }
   
@@ -254,7 +254,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   func updatePlayer() {
     
     // Set velocity based on core motion
-    player.physicsBody?.velocity = CGVector(dx: xAcceleration * 400.0, dy: player.physicsBody!.velocity.dy)
+    player.physicsBody?.velocity.dx = xAcceleration * 400.0
   
     // Wrap player around edges of screen
     if player.position.x < -player.size.width/2 {
@@ -321,7 +321,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
   // MARK: Helpers
   func setPlayerVelocity(amount:CGFloat) {
-    player.physicsBody!.velocity = CGVector(dx: player.physicsBody!.velocity.dx, dy: max(player.physicsBody!.velocity.dy, amount))
+    player.physicsBody!.velocity.dy = max(player.physicsBody!.velocity.dy, amount)
   }
   
   func jumpPlayer() {
