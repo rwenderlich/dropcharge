@@ -1,0 +1,240 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>2-Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+body{-webkit-font-smoothing:antialiased;font-family:"Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;margin:30px 0 0;padding:0;background:#fff}#wrapper{padding:20px}li{font-size:110%}li li{font-size:100%}li p{font-size:100%;margin:.5em 0}h1{color:#000}h2{color:#111}h3{color:#111;margin:0}h4{color:#111}h5{color:#111}h6{font-size:1em;line-height:1.5em;margin:1.5em 0}body,p,td,div{color:#111;font-family:"Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;word-wrap:break-word}a{color:#0d6ea1;text-decoration:none;-webkit-transition:color 0.2s ease-in-out;-moz-transition:color 0.2s ease-in-out;-o-transition:color 0.2s ease-in-out;-ms-transition:color 0.2s ease-in-out;transition:color 0.2s ease-in-out}a:hover{color:#3593d9}body{font-size:15px;line-height:21px;margin:0 auto}h1{font-size:37px;line-height:42px;margin-top:42px;margin-bottom:21px}h2{font-size:27px;line-height:42px;margin-top:42px;margin-bottom:21px}h3{font-size:20px;line-height:21px;margin-top:21px;margin-bottom:21px}h4{font-size:20px;line-height:21px;margin-top:21px;margin-bottom:21px}p,ul,ol,pre,table,blockquote{margin-top:21px;margin-bottom:21px}hr{border:1px solid;margin:-1px 0}ul ul,ol ol,ul ol,ol ul{margin-top:0;margin-bottom:0}b,strong,em,small,code{line-height:1}.footnote{color:#0d6ea1;font-size:.8em;vertical-align:super}#wrapper img{max-width:100%;height:auto}dd{font-size:1em;margin-bottom:1em}li>p:first-child{margin:0}ul ul,ul ol{margin-bottom:.4em}caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr{border-spacing:0}table{border:1px solid rgba(0,0,0,0.25);border-collapse:collapse;display:table;empty-cells:hide;margin:-1px 0 1.3125em;padding:0;table-layout:fixed}caption{display:table-caption;font-weight:700}col{display:table-column}colgroup{display:table-column-group}tbody{display:table-row-group}tfoot{display:table-footer-group}thead{display:table-header-group}td,th{display:table-cell}tr{display:table-row}table th,table td{font-size:1.1em;line-height:1.3;padding:.5em 1em 0}table thead{background:rgba(0,0,0,0.15);border:1px solid rgba(0,0,0,0.15);border-bottom:1px solid rgba(0,0,0,0.2)}table tbody{background:rgba(0,0,0,0.05)}table tfoot{background:rgba(0,0,0,0.15);border:1px solid rgba(0,0,0,0.15);border-top:1px solid rgba(0,0,0,0.2)}figure{display:inline-block;overflow:hidden;position:relative;margin:1em 0 2em}figcaption{font-style:italic;text-align:center;background:white;color:#666}.poetry pre{display:block;font-family:Georgia,Garamond,serif !important;font-size:110% !important;font-style:italic;line-height:1.6em;margin-left:1em}.poetry pre code{font-family:Georgia,Garamond,serif !important;word-break:break-all;word-break:break-word;-webkit-hyphens:auto;-moz-hyphens:auto;hyphens:auto;white-space:pre-wrap}blockquote p{font-size:110%;font-style:italic;line-height:1.6em}sup,sub,a.footnote{font-size:1.4ex;height:0;line-height:1;position:relative;vertical-align:super}sub{vertical-align:sub;top:-1px}p,h5{font-size:1.1429em;line-height:1.3125em;margin:1.3125em 0}dt,th{font-weight:700}table tr:nth-child(odd),table th:nth-child(odd),table td:nth-child(odd){background:rgba(255,255,255,0.06)}table tr:nth-child(even),table td:nth-child(even){background:rgba(200,200,200,0.25)}@media print{body{font-size:13px !important}img,table,figure{page-break-inside:avoid}#wrapper{background:#fff;color:#303030;padding:10px;position:relative;text-indent:0}}@media screen{.inverted{background:#252a2a}.inverted #wrapper{background:#252a2a;color:#eee}.inverted hr{border-color:#333f40 !important}.inverted p,.inverted td,.inverted li,.inverted h1,.inverted h2,.inverted h3,.inverted h4,.inverted h5,.inverted h6,.inverted th,.inverted .math,.inverted caption,.inverted dt,.inverted dd{color:#eee}.inverted pre{background:#ccc}.inverted pre code{color:#111}.inverted table{background:none}.inverted table tr:nth-child(odd),.inverted table td:nth-child(odd){background:none}.inverted a{color:#acd1d5}::selection{background:rgba(157,193,200,0.5)}h1::selection{background-color:rgba(45,156,208,0.3)}h2::selection{background-color:rgba(90,182,224,0.3)}h3::selection,h4::selection,h5::selection,h6::selection,li::selection,ol::selection{background-color:rgba(133,201,232,0.3)}code::selection{background-color:rgba(0,0,0,0.7);color:#eee}code span::selection{background-color:rgba(0,0,0,0.7) !important;color:#eee !important}a::selection{background-color:rgba(255,230,102,0.2)}.inverted a::selection{background-color:rgba(255,230,102,0.6)}td::selection,th::selection,caption::selection{background-color:rgba(180,237,95,0.5)}}
+
+@media print{
+#generated-toc-clone,#generated-toc{display:none!important}
+}
+#generated-toc-clone li.missing,#mkreplaced-toc li.missing{list-style-type:none!important}#generated-toc-clone li, #mkreplaced-toc li{list-style-type:upper-roman}#generated-toc-clone li li, #mkreplaced-toc li li{list-style-type:decimal}#generated-toc-clone li li li,#mkreplaced-toc li li li{list-style-type:decimal-leading-zero}#generated-toc-clone li li li li,#mkreplaced-toc li li li li{list-style-type:lower-greek}#generated-toc-clone li li li li li,#mkreplaced-toc li li li li li{list-style-type:disc}#generated-toc-clone li li li li li li,#mkreplaced-toc li li li li li li{list-style-type:square}
+</style>
+
+</head>
+<body class="normal firstload">
+  <div id="wrapper">
+      <h1>Basic Gameplay</h1>
+
+<p>In this demo, you will add some basic gameplay to the game Drop Charge.<br/>
+The steps here will be explained in the demo, but here are the raw steps in case you miss a step or get stuck.</p>
+
+<h2>1) Add Title</h2>
+
+<p>At the top of <strong>GameScene.swift</strong>, add to bottom of the list of properties:</p>
+
+<pre><code>var title: SKSpriteNode!
+</code></pre>
+
+<p>In <code>setupLevel()</code>, add the following:</p>
+
+<pre><code>title = SKSpriteNode(imageNamed: &quot;DropCharge_title&quot;)  
+fgNode.addChild(title)
+</code></pre>
+
+<h2>2) Position Title</h2>
+
+<p>In <code>setupLevel()</code>, add the following:</p>
+
+<pre><code>title.position = CGPoint(x: size.width/2, y: size.height * 0.7)
+</code></pre>
+
+<h2>3) Add Player</h2>
+
+<p>At the top of the file, add to the bottom of the list of properties:</p>
+
+<pre><code>let player = SKSpriteNode(imageNamed: &quot;player01_fall_1&quot;)
+</code></pre>
+
+<p>In <code>setupPlayer()</code>, add the following:</p>
+
+<pre><code>player.position = CGPoint(x: size.width / 2, y: 80)  
+fgNode.addChild(player)
+</code></pre>
+
+<h2>4) Scale out title</h2>
+
+<p>In <code>switchToWaitingForBomb()</code>, implement the “Scale out title” as follows:</p>
+
+<pre><code>// Scale out title  
+let scale = SKAction.scaleTo(0, duration: 0.5)  
+title.runAction(scale)
+</code></pre>
+
+<h2>5) Add bomb</h2>
+
+<p>At the top of the file, add to the bottom of the list of properties:</p>
+
+<pre><code>let bomb = SKSpriteNode(imageNamed: &quot;bomb_1&quot;)
+</code></pre>
+
+<p>In <code>switchToWaitingForBomb()</code>, implement “Add bomb”, and “Bounce bomb” sections as follows:</p>
+
+<pre><code>// Add bomb  
+bomb.position = player.position  
+fgNode.addChild(bomb)
+
+// Bounce bomb  
+let scaleUp = SKAction.scaleTo(1.25, duration: 0.25)  
+let scaleDown = SKAction.scaleTo(1.0, duration: 0.25)  
+let sequence = SKAction.sequence([scaleUp, scaleDown])  
+let repeat = SKAction.repeatActionForever(sequence)  
+bomb.runAction(repeat)
+</code></pre>
+
+<h2>6) Z Positioning</h2>
+
+<p>Add to the bottom of <code>setupPlayer()</code>:</p>
+
+<pre><code>player.zPosition = ForegroundZ.Player.rawValue
+</code></pre>
+
+<p>In <code>switchToWaitingForBomb()</code>, add to the bottom of the “Add bomb” section:</p>
+
+<pre><code>bomb.zPosition = ForegroundZ.Bomb.rawValue
+</code></pre>
+
+<h2>7) Switch to Playing</h2>
+
+<p>In <code>switchToWaitingForBomb()</code>, implement the “Switch to playing state” section as follows:</p>
+
+<pre><code>// Switch to playing state  
+runAction(SKAction.sequence([  
+  SKAction.waitForDuration(2.0),  
+  SKAction.runBlock(switchToPlaying)  
+]))    
+</code></pre>
+
+<p>In <code>switchToPlaying()</code>, implement the “Stop bomb” section as follows:</p>
+
+<pre><code>bomb.removeFromParent()
+</code></pre>
+
+<h2>8) Add Player Physics Body</h2>
+
+<p>Add to the bottom of <code>setupPlayer()</code>:</p>
+
+<pre><code>player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)  
+player.physicsBody!.dynamic = false  
+player.physicsBody!.allowsRotation = false  
+player.physicsBody!.categoryBitMask = PhysicsCategory.Player  
+player.physicsBody!.collisionBitMask = 0
+</code></pre>
+
+<p>In <code>switchToPlaying()</code>, implement the “Start player movement” section as follows:</p>
+
+<pre><code>// Start player movement  
+player.physicsBody!.dynamic = true    
+</code></pre>
+
+<h2>9) Boost Player</h2>
+
+<p>In <code>switchToPlaying()</code>, add to the bottom of the “Start player movement” section:</p>
+
+<pre><code>superBoostPlayer()
+</code></pre>
+
+<p>In <code>setPlayerVelocity()</code>, add the following:</p>
+
+<pre><code>player.physicsBody!.velocity.dy = max(player.physicsBody!.velocity.dy, amount)
+</code></pre>
+
+<h2>10) Contact Detection</h2>
+
+<p>In <code>setupPhysics()</code>, add the following:</p>
+
+<pre><code>physicsWorld.contactDelegate = self
+</code></pre>
+
+<p>At the top of the file, mark <code>GameScene</code> as implementing <code>SKPhysicsContactDelegate</code>:</p>
+
+<pre><code>class GameScene: SKScene, SKPhysicsContactDelegate {
+</code></pre>
+
+<p>In <code>didBeginContact()</code>, implement the four cases as follows:</p>
+
+<pre><code>case PhysicsCategory.CoinNormal:  
+  if let coin = other.node as? SKSpriteNode {  
+    coin.removeFromParent()  
+    jumpPlayer()  
+  }
+case PhysicsCategory.CoinSpecial:  
+  if let coin = other.node as? SKSpriteNode {  
+    coin.removeFromParent()  
+    boostPlayer()  
+  }
+case PhysicsCategory.PlatformNormal:  
+  if let platform = other.node as? SKSpriteNode {  
+    if player.physicsBody!.velocity.dy &lt; 0 {  
+      jumpPlayer()  
+    }
+  }  
+case PhysicsCategory.PlatformBreakable:  
+  if let platform = other.node as? SKSpriteNode {  
+    if player.physicsBody!.velocity.dy &lt; 0 {  
+      platform.removeFromParent()  
+      jumpPlayer()  
+    }
+  }
+</code></pre>
+
+<h2>11) Player Movement</h2>
+
+<p>In <code>handlePlayingTouches()</code>, add the following code:</p>
+
+<pre><code>let touchTarget = touch.locationInNode(self)  
+let xVelocity = touchTarget.x &lt; player.position.x ?  
+  CGFloat(-150.0) : CGFloat(150.0)  
+player.physicsBody!.velocity.dx = xVelocity
+</code></pre>
+
+<p>In <code>updatePlayer()</code>, uncomment the following code if you have a device to test on:</p>
+
+<pre><code>// Set velocity based on core motion  
+player.physicsBody?.velocity.dx = xAcceleration * 400.0
+</code></pre>
+
+<p>In <code>updatePlayer()</code>, uncomment the following code whether you have a device or not:</p>
+
+<pre><code>// Wrap player around edges of screen  
+if player.position.x &lt; -player.size.width/2 {  
+  player.position.x = size.width + player.size.width/2  
+}
+else if player.position.x &gt; size.width + player.size.width/2 {  
+  player.position.x = -player.size.width/2  
+}
+</code></pre>
+
+<h2>12) Camera Movement</h2>
+
+<p>In <code>updateCamera()</code>, uncomment the following code:</p>
+
+<pre><code>let target = player.position  
+var targetPosition = CGPoint(  
+  x: worldNode.position.x,  
+  y: -(target.y - size.height * 0.4))  
+var newPosition = targetPosition
+
+self.fgNode.position = newPosition  
+self.mgNode.position = newPosition  
+self.bgNode.position = newPosition
+</code></pre>
+
+<h2>13) Parallax Scrolling</h2>
+
+<p>In <code>updateCamera()</code>, change the last 2 lines as follows:</p>
+
+<pre><code>self.mgNode.position = newPosition/5.0  
+self.bgNode.position = newPosition/10.0
+</code></pre>
+
+<h2>14) That's it!</h2>
+
+<p>Congrats, at this time you should have the basic gameplay complete, and learned a lot about Sprite Kit along the way! You are ready to move on to the lab.</p>
+<!-- ##END MARKED WRAPPER## -->
+    </div>
+</body>
+</html>
