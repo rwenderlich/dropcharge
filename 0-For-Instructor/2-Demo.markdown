@@ -1,4 +1,4 @@
-# Basic Gameplay
+# 207: Sprite Kit, Part 2: Demo Instructions
 
 In this demo, you will add some basic gameplay to the game Drop Charge.
 The steps here will be explained in the demo, but here are the raw steps in case you miss a step or get stuck.
